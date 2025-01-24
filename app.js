@@ -47,3 +47,32 @@ function adicionarAmigo() {
     atualizarListaNaTela(nome);
     limparCampoDeEntrada();
 }
+// Função para exibir a lista de amigos na tela
+function exibirListaDeAmigos() {
+    // Obter o elemento da lista
+    const elementoLista = document.querySelector('#listaAmigos');
+
+    // Limpar a lista existente
+    elementoLista.innerHTML = "";
+
+    // Percorrer o array de amigos
+    for (let amigo of listaDeAmigos) {
+        // Criar um novo elemento <li> para cada amigo
+        const novoItem = document.createElement('li');
+        novoItem.textContent = amigo; // Adicionar o nome ao item de lista
+
+        // Adicionar o item à lista
+        elementoLista.appendChild(novoItem);
+    }
+}
+function adicionarAmigo() {
+    const nome = capturarNomeDoCampo();
+
+    if (!validarNome(nome)) {
+        return;
+    }
+
+    adicionarNomeAoArray(nome);
+    exibirListaDeAmigos(); // Atualizar a lista após adicionar um amigo
+    limparCampoDeEntrada();
+}
