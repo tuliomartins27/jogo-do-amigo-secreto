@@ -27,26 +27,6 @@ function limparCampoDeEntrada() {
     campoDeEntrada.value = "";
 }
 
-// Função para atualizar a lista na tela
-function atualizarListaNaTela(nome) {
-    const listaDeElementos = document.querySelector('#listaAmigos');
-    const novoItem = document.createElement('li');
-    novoItem.textContent = nome;
-    listaDeElementos.appendChild(novoItem);
-}
-
-// Função principal para adicionar amigos
-function adicionarAmigo() {
-    const nome = capturarNomeDoCampo();
-
-    if (!validarNome(nome)) {
-        return; // Sai da função se a validação falhar
-    }
-
-    adicionarNomeAoArray(nome);
-    atualizarListaNaTela(nome);
-    limparCampoDeEntrada();
-}
 // Função para exibir a lista de amigos na tela
 function exibirListaDeAmigos() {
     // Obter o elemento da lista
@@ -65,6 +45,8 @@ function exibirListaDeAmigos() {
         elementoLista.appendChild(novoItem);
     }
 }
+
+// Função principal para adicionar amigos
 function adicionarAmigo() {
     const nome = capturarNomeDoCampo();
 
@@ -75,4 +57,23 @@ function adicionarAmigo() {
     adicionarNomeAoArray(nome);
     exibirListaDeAmigos(); // Atualizar a lista após adicionar um amigo
     limparCampoDeEntrada();
+}
+
+// Função para sortear um amigo aleatório
+function sortearAmigo() {
+    // Verifica se há amigos disponíveis no array
+    if (listaDeAmigos.length === 0) {
+        alert("Não há amigos na lista para sortear!");
+        return;
+    }
+
+    // Gera um índice aleatório com base no tamanho do array
+    const indiceAleatorio = Math.floor(Math.random() * listaDeAmigos.length);
+
+    // Obtém o nome do amigo sorteado
+    const amigoSorteado = listaDeAmigos[indiceAleatorio];
+
+    // Atualiza o conteúdo do elemento de resultado no HTML
+    const elementoResultado = document.getElementById("resultado");
+    elementoResultado.innerHTML = `Amigo sorteado: <strong>${amigoSorteado}</strong>`;
 }
